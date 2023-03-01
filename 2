@@ -1,0 +1,93 @@
+#include<iostream>
+#include<Windows.h>
+
+using namespace std;
+
+class Tovar
+{
+protected:
+	size_t kod;
+	double cesh;
+public:
+	Tovar(): kod(rand()), cesh(rand()%1450) {}
+	Tovar(size_t k,double c) : kod(k), cesh(c) {}
+
+	size_t get_kod() { return 0; }
+
+	void zap_tow(Tovar*arr)
+	{
+		size_t a;
+		cout << " Введіть кількість товару  " << endl;
+		cin >> a;
+		for (size_t i = 0; i < a; i++)
+		{
+			cout << " Введіть код товару " << endl;
+			cin >> this->kod;
+			cout << " Введіть ціну товару " << endl;
+			cin >> this->cesh;
+		}
+	}
+};
+
+class Toy : public Tovar
+{
+protected:
+	string name;
+	size_t min_lat;
+	size_t max_lat;
+public:
+	Toy(): name(""),min_lat(0), max_lat(0) {}
+	Toy(string n,size_t il,size_t al): name(n), min_lat(il), max_lat(al) {}
+
+	friend void zap(Toy* arr, size_t n);
+
+	void print()
+	{
+		cout << " Назва:" << name << " рекомендований вік: " << min_lat << " - " << max_lat << " код товару " << kod << " ціна :" << cesh << endl;
+	}
+
+	friend void min_max_lat(Toy* arr, size_t n);
+
+};
+
+void zap(Toy* arr,size_t n)
+{
+	for (size_t i = 0; i < n; i++)
+	{
+		cout << " Введіть назву іграшки " << endl;
+		cin >> arr[i].name;
+		cout << " Введіть мінімальний рекомендований вік " << endl;
+		cin >> arr[i].min_lat;
+		cout << " Введіть максимальний рекомендований вік " << endl;
+		cin >> arr[i].max_lat;
+
+	}
+}
+void min_max_lat(Toy* arr , size_t n)
+{
+	size_t lat;
+	cout << " Введіть рекомендований рік " << endl;
+	cin >> lat;
+	for (size_t i = 0; i < n; i++)
+	{
+		if (arr[i].min_lat <= lat && arr[i].max_lat >= lat)
+		{
+			arr[i].print();
+		}
+	}
+}
+
+
+int main()
+{
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+
+	Toy toy[5];
+
+	zap(toy,5);
+	min_max_lat(toy,5);
+
+
+	return 0;
+}
