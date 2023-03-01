@@ -1,0 +1,77 @@
+#include <iostream>
+#include <Windows.h>
+#include <istream>
+#include <ostream>
+
+using namespace std;
+
+class Phone
+{
+protected:
+	string name;
+	string firm;
+	double cesh;
+public:
+
+	friend void sort(Phone& arr);
+	friend istream& operator>>(istream& on, Phone a);
+	friend ostream& operator<<(ostream& in, Phone a);
+
+};
+
+class MobailPhone: public Phone
+{
+protected:
+	string color;
+	size_t memory;
+public:
+
+};
+
+class radiotelephone : public Phone
+{
+protected:
+	double radius;
+	bool answering_machine;
+public:
+
+};
+
+void sort(Phone& arr)
+{
+
+}
+istream& operator>>(istream& on, Phone a)
+{
+	on >> a.name >> a.firm >> a.cesh;
+	return on;
+}
+ostream& operator<<(ostream& in, const Phone a)
+{
+	a << a.name << a.firm << a.cesh;
+	return a;
+}
+
+int main()
+{
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+
+	Phone arr[40];
+
+	ifstream f("Phone.txt");
+	f >> n;
+	Phone* array = new Phone[n];
+
+	int i = 0;
+	while (!f.eof() && i < n)
+	{
+		f >> array[i];
+		i++;
+	}
+	f.close();
+
+
+
+	return 0;
+}
